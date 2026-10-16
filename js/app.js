@@ -56,6 +56,27 @@
   $("#post-count").textContent = posts.length;
   $("#photo-count").textContent = posts.reduce((n, p) => n + p.photos.length, 0);
 
+  const avatarSrc = baby.avatar || (posts.find((p) => p.photos.length) || { photos: [] }).photos[0];
+  if (avatarSrc) $("#avatar").innerHTML = `<img src="${esc(avatarSrc)}" alt="">`;
+
+  if (birth) {
+    const now = new Date();
+    now.setHours(0, 0, 0, 0);
+    const done = Math.max(0, monthsBetween(birth, now));
+    const next = new Date(birth.getFullYear(), birth.getMonth() + done + 1, birth.getDate());
+    const left = Math.round((next - now) / 86400000);
+    if (now >= birth && done < 24) {
+      $("#next-month").textContent = left === 0
+        ? `🎉 ${done + 1} months old today!`
+        : `${left} ${left === 1 ? "day" : "days"} until ${done + 1} ${done + 1 === 1 ? "month" : "months"} ✨`;
+    }
+    $("#age-sub").textContent = "old today · born " + fmtDate(baby.birthday);
+  }
+
+  const toTop = $("#to-top");
+  window.addEventListener("scroll", () => { toTop.hidden = window.scrollY < 600; }, { passive: true });
+  toTop.addEventListener("click", () => window.scrollTo({ top: 0 }));
+
   // ---------- tags ----------
   const allTags = [...new Set(posts.flatMap((p) => p.tags))].sort();
   $("#tags").innerHTML = allTags.length
@@ -118,7 +139,9 @@
         if (g !== lastGroup) { html += `<h2 class="month-head">${esc(g)}</h2>`; lastGroup = g; }
         const n = p.photos.length;
         const paras = (p.text || "").split(/\n\s*\n/).filter(Boolean).map((t) => `<p>${esc(t)}</p>`).join("");
-        html += `<article class="post">
+        const star = p.tags.includes("milestone");
+        html += `<article class="post${star ? " milestone" : ""}">
+          ${star ? `<span class="badge" title="Milestone">★ Milestone</span>` : ""}
           <div class="post-meta"><time datetime="${p.date}">${fmtDate(p.date)}</time>
             ${birth ? `<span>·</span><span class="age">${esc(ageLabel(parseDate(p.date)))}</span>` : ""}</div>
           <h2>${esc(p.title)}</h2>
@@ -130,7 +153,7 @@
       $("#timeline").innerHTML = html;
     } else {
       $("#gallery").innerHTML = list
-        .flatMap((p) => p.photos.map((s) => photoButton(p, s, `<span class="g-date">${esc(ageLabel(parseDate(p.date)) || p.date)}</span>`)))
+        .flatMap((p) => p.photos.map((s) => photoButton(p, s, `<span class="g-cap">${esc(p.title)}<small>${esc(ageLabel(parseDate(p.date)) || fmtDate(p.date))}</small></span>`)))
         .join("");
     }
   }

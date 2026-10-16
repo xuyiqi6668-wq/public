@@ -7,21 +7,25 @@
   <meta name="description" content="A personal photo diary of our baby growing up.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍼</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <header class="hero">
-    <div class="wrap">
+    <div class="bubbles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="wrap hero-inner">
+      <div class="avatar" id="avatar" aria-hidden="true"><span>👶</span></div>
       <p class="eyebrow">Our baby diary</p>
       <h1 id="baby-name">Little One</h1>
       <p id="tagline" class="tagline"></p>
       <div class="stats">
-        <div class="stat"><span id="age" class="stat-num">–</span><span class="stat-label">old today</span></div>
+        <div class="stat stat-age"><span id="age" class="stat-num">–</span><span id="age-sub" class="stat-label">old today</span></div>
         <div class="stat"><span id="post-count" class="stat-num">0</span><span class="stat-label">memories</span></div>
         <div class="stat"><span id="photo-count" class="stat-num">0</span><span class="stat-label">photos</span></div>
       </div>
+      <p id="next-month" class="next-month"></p>
     </div>
+    <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 40 C 240 90 480 0 720 30 S 1200 80 1440 30 V80 H0Z"/></svg>
   </header>
 
   <nav class="toolbar wrap" aria-label="Filters">
@@ -41,8 +45,11 @@
   </main>
 
   <footer class="wrap footer">
+    <span class="heart">♥</span>
     Made with love by <span id="author"></span> · <span id="year"></span>
   </footer>
+
+  <button id="to-top" class="to-top" aria-label="Back to top" hidden>↑</button>
 
   <div id="lightbox" class="lightbox" hidden role="dialog" aria-modal="true" aria-label="Photo viewer">
     <button class="lb-close" aria-label="Close">×</button>

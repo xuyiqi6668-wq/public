@@ -20,7 +20,8 @@ window.BABY = {
   name: "Little One",          // your baby's name
   birthday: "2026-03-08",      // YYYY-MM-DD
   tagline: "Tiny feet, big adventures — a diary of growing up.",
-  author: "Mom & Dad"
+  author: "Mom & Dad",
+  avatar: ""                   // optional round photo at the top, e.g. "photos/me.jpg" (empty = newest photo)
 };
 
 // Where the "Add memory" page (upload.html) saves new photos and posts.
