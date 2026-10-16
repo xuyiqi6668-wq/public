@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Add a Memory</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📷</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="hero hero-small">
+    <div class="wrap">
+      <p class="eyebrow"><a href="index.html">← Back to the diary</a></p>
+      <h1>Add a memory</h1>
+    </div>
+  </header>
+
+  <main class="wrap upload">
+    <details id="setup" class="card">
+      <summary><strong>Step 1 · Connect to GitHub</strong> <span id="setup-state" class="muted"></span></summary>
+      <p>The site saves photos into your GitHub repository, so it needs an access key once on this device.</p>
+      <ol>
+        <li>Open <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub → New fine-grained token</a>.</li>
+        <li>Name it e.g. <em>baby diary</em>. Under <b>Repository access</b> choose <b>Only select repositories</b> → <code id="repo-name"></code>.</li>
+        <li>Under <b>Permissions → Repository permissions</b>, set <b>Contents</b> to <b>Read and write</b>.</li>
+        <li>Click <b>Generate token</b>, copy it and paste it below.</li>
+      </ol>
+      <label>Access token
+        <input id="token" type="password" autocomplete="off" placeholder="github_pat_…">
+      </label>
+      <div class="row">
+        <button id="save-token" class="btn" type="button">Save on this device</button>
+        <button id="forget-token" class="btn btn-ghost" type="button">Forget</button>
+      </div>
+      <p class="muted small">The token stays only in this browser. Don't use this page on a shared computer.</p>
+    </details>
+
+    <form id="form" class="card">
+      <strong>Step 2 · Your memory</strong>
+      <label>Date <input id="date" type="date" required></label>
+      <label>Title <input id="title" type="text" required placeholder="First steps!"></label>
+      <label><span>Story <span class="muted">(optional)</span></span>
+        <textarea id="text" rows="4" placeholder="What happened today…"></textarea>
+      </label>
+      <label><span>Tags <span class="muted">(optional, separated by commas)</span></span>
+        <input id="tags-input" type="text" placeholder="milestone, first time">
+      </label>
+      <label class="drop" id="drop">
+        <input id="files" type="file" accept="image/*" multiple>
+        <span>📷 <b>Choose photos</b> or drop them here</span>
+      </label>
+      <div id="previews" class="previews"></div>
+      <button id="publish" class="btn btn-big" type="submit">Publish memory</button>
+      <p id="status" class="status" role="status"></p>
+    </form>
+  </main>
+
+  <script src="data/posts.js"></script>
+  <script src="js/upload.js"></script>
+</body>
+</html>

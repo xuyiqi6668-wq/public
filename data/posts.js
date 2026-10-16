@@ -23,6 +23,15 @@ window.BABY = {
   author: "Mom & Dad"
 };
 
+// Where the "Add memory" page (upload.html) saves new photos and posts.
+window.SITE_REPO = {
+  owner: "xuyiqi6668-wq",
+  repo: "public",
+  branch: "claude/personal-blog-baby-pictures-b09nf5"   // the branch GitHub Pages publishes
+};
+
+// Keep POSTS as the last thing in this file — the upload page adds new posts to the end of it.
+
 window.POSTS = [
   {
     date: "2026-03-08",
